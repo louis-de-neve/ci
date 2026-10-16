@@ -20,7 +20,7 @@ def main(argv=None):
     Returns
     -------
     int
-        Zero if the summary was produced successfully.
+        Zero if the summary was produced successfully (tested).
     """
     parser = argparse.ArgumentParser(prog="ci-course", description="Summarise a CSV file of measurements.")
     parser.add_argument("csv", nargs="?", default=None, help="the CSV file to summarise")
