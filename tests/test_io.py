@@ -26,3 +26,12 @@ def test_reads_a_file_given_by_path(tmp_path):
 
     assert list(data) == ["height_m"]
     assert data["height_m"].tolist() == [1.5, 2.5]
+
+def test_reads_a_file_given_by_path2(tmp_path):
+    csv = tmp_path / "measurements.csv"
+    csv.write_text("sample_id,height_m\nB,abc\n", encoding="utf-8")
+    err = []
+    data = ci_course.load_measurements(csv, errors=err)
+
+    assert len(err) == 1
+    assert np.isnan(data["height_m"].tolist()[0])

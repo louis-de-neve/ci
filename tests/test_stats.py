@@ -37,3 +37,7 @@ def test_a_column_of_only_missing_values():
     assert summary["n"] == 0
     assert np.isnan(summary["mean"])
 
+def test_a_column_of_one_value():
+    summary = ci_course.summarise(np.array([1]))
+
+    assert summary["sd"] == 0
