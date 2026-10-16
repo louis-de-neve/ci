@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API reference &#8212; ContinuousIntegrationOXRes  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ContinuousIntegrationOXRes documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-ci_course.io">
+<span id="api-reference"></span><h1>API reference<a class="headerlink" href="#module-ci_course.io" title="Link to this heading">¶</a></h1>
+<p>Reading measurement data from CSV files.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.io.load_measurements">
+<span class="sig-prename descclassname"><span class="pre">ci_course.io.</span></span><span class="sig-name descname"><span class="pre">load_measurements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.io.load_measurements" title="Link to this definition">¶</a></dt>
+<dd><p>Load a table of measurements from a CSV file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sample_id</span></code> column is treated as a label and is not returned. Every
+other column is read as a column of floats. Blank cells are recorded as
+<code class="docutils literal notranslate"><span class="pre">nan</span></code>, because a missing measurement is not the same as a measurement of
+zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em><em>, </em><em>optional</em>) – The CSV file to read. Defaults to the sample data bundled with the
+package.</p></li>
+<li><p><strong>errors</strong> (<em>list</em><em>, </em><em>optional</em>) – Any row that could not be parsed is appended to this list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A mapping of column name to <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> of float.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.io.sample_data_path">
+<span class="sig-prename descclassname"><span class="pre">ci_course.io.</span></span><span class="sig-name descname"><span class="pre">sample_data_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.io.sample_data_path" title="Link to this definition">¶</a></dt>
+<dd><p>Return the path to the sample measurements bundled with the package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The location of <code class="docutils literal notranslate"><span class="pre">sample_measurements.csv</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-ci_course.stats">Summary statistics for columns of measurements.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.stats.count_missing">
+<span class="sig-prename descclassname"><span class="pre">ci_course.stats.</span></span><span class="sig-name descname"><span class="pre">count_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.stats.count_missing" title="Link to this definition">¶</a></dt>
+<dd><p>Count number of missing values within an array-like object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>array_like</em>) – The measurements to count. Missing values should be <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of missing measurements present.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.stats.summarise">
+<span class="sig-prename descclassname"><span class="pre">ci_course.stats.</span></span><span class="sig-name descname"><span class="pre">summarise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.stats.summarise" title="Link to this definition">¶</a></dt>
+<dd><p>Summarise one column of measurements, ignoring any missing values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>array_like</em>) – The measurements to summarise. Missing values should be <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of measurements present, and their mean, standard
+deviation, minimum and maximum.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.stats.summarise_all">
+<span class="sig-prename descclassname"><span class="pre">ci_course.stats.</span></span><span class="sig-name descname"><span class="pre">summarise_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurements</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.stats.summarise_all" title="Link to this definition">¶</a></dt>
+<dd><p>Summarise every column in a table of measurements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>measurements</strong> (<em>dict</em>) – A mapping of column name to measurements, as returned by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ci_course.load_measurements()</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A mapping of column name to the summary of that column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-ci_course.report">Writing summary reports to disk.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.report.format_report">
+<span class="sig-prename descclassname"><span class="pre">ci_course.report.</span></span><span class="sig-name descname"><span class="pre">format_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summaries</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.report.format_report" title="Link to this definition">¶</a></dt>
+<dd><p>Format a set of column summaries as plain text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>summaries</strong> (<em>dict</em>) – A mapping of column name to summary, as returned by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ci_course.summarise_all()</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The formatted report.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ci_course.report.write_report">
+<span class="sig-prename descclassname"><span class="pre">ci_course.report.</span></span><span class="sig-name descname"><span class="pre">write_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ci_course.report.write_report" title="Link to this definition">¶</a></dt>
+<dd><p>Write a report, replacing any report already at <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<p>The report is written to a temporary file and then moved into place, so
+that an interrupted run cannot leave a half written report behind.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>summaries</strong> (<em>dict</em>) – A mapping of column name to summary.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Where to write the report.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path the report was written to.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ContinuousIntegrationOXRes</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.io.load_measurements"><code class="docutils literal notranslate"><span class="pre">load_measurements()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.io.sample_data_path"><code class="docutils literal notranslate"><span class="pre">sample_data_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.stats.count_missing"><code class="docutils literal notranslate"><span class="pre">count_missing()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.stats.summarise"><code class="docutils literal notranslate"><span class="pre">summarise()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.stats.summarise_all"><code class="docutils literal notranslate"><span class="pre">summarise_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.report.format_report"><code class="docutils literal notranslate"><span class="pre">format_report()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci_course.report.write_report"><code class="docutils literal notranslate"><span class="pre">write_report()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">ContinuousIntegrationOXRes documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Louis De Neve.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/reference.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
